@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.todolist.ToastMessage
 import com.example.todolist.domain.model.Todo
+import com.example.todolist.taskTextStyle
 import com.example.todolist.viewmodel.TodoViewModel
 import kotlinx.coroutines.job
 
@@ -112,7 +113,8 @@ fun AlertDialog_Home(
                                 Icon(imageVector = Icons.Rounded.Clear, contentDescription = null
                                 )
                             }
-                        }
+                        },
+                        textStyle = taskTextStyle
                     )
                     Row (
                         modifier = Modifier
