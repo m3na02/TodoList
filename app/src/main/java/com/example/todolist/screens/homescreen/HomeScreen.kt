@@ -19,7 +19,7 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,6 +27,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -45,6 +46,7 @@ fun HomeScreen(
     TodoViewModel: TodoViewModel,
     onUpdate: (id: Int) -> Unit
 ) {
+
     val todos by TodoViewModel.getAllTodos.collectAsStateWithLifecycle(initialValue = emptyList())
     
     var openDialog by rememberSaveable { mutableStateOf(false) }
@@ -54,27 +56,35 @@ fun HomeScreen(
 
     
     Scaffold(
+        // snackbar host to display snackbars
         snackbarHost = { SnackbarHost (hostState = snackbarHostState)},
         topBar = {
-            TopAppBar(title = {
-                Text(
-                    text = "ToDo List App",
-                    style = topAppBarTextStyle,
-                    modifier = Modifier.fillMaxWidth(),
-                    textAlign = TextAlign.Center
-                )
+            TopAppBar(
+                title = {
+                    Text(
+                        text = "ToDo List App",
+                        style = topAppBarTextStyle,
+                        modifier = Modifier.fillMaxWidth(),
+                        textAlign = TextAlign.Center
+                        )
             },
+                // customise top app bar colors
+            colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor =  Color(204, 150, 227, 255)
+                )
             )
         },
+        // floating action button for adding new todos
         floatingActionButton = {
             FloatingActionButton(
                 onClick = { openDialog = true },
+                containerColor = Color(210, 149, 228),
                 ) {
                 Icon(imageVector = Icons.Rounded.Add, contentDescription = null)
-
             }
         }
     ) { paddingValues ->
+        // background image
         Box(modifier = Modifier.fillMaxSize()){
             Image(
                 painter = painterResource(id = R.drawable.background),
@@ -87,6 +97,7 @@ fun HomeScreen(
             onClose = { openDialog = false },
             TodoViewModel = TodoViewModel)
 
+        // check if there is no todos
         if (todos.isEmpty()){
             EmptyTaskScreen(paddingValues = paddingValues)
         } else{

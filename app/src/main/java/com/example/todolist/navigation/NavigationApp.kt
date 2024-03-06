@@ -16,8 +16,10 @@ import com.example.todolist.viewmodel.TodoViewModel
 
 @Composable
 fun NavigationApp(TodoViewModel: TodoViewModel){
+    // NavController to handel the navigation within the app
     val navController = rememberNavController()
 
+    // Setting up the navigation graph using NavHost
     NavHost(
         navController = navController,
         startDestination = Screens.HomeScreen.name
@@ -26,6 +28,7 @@ fun NavigationApp(TodoViewModel: TodoViewModel){
         {
             HomeScreen(
                 TodoViewModel = TodoViewModel,
+                // Navigate to Update screen when the onUpdate callback is triggered
                 onUpdate = {id ->
                     navController.navigate( route = "${Screens.UpdateScreen.name}/$id" )
                 })

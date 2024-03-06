@@ -3,7 +3,6 @@ package com.example.todolist
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import java.time.format.TextStyle
 
 val taskTextStyle = androidx.compose.ui.text.TextStyle(
     fontSize = 22.sp,

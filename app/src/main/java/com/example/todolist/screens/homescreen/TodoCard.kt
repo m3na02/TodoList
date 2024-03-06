@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.todolist.domain.model.Todo
@@ -25,10 +26,12 @@ fun TodoCard(
     onDone: () -> Unit,
     onUpdate: (id: Int) -> Unit
 ){
+    // card containing the todo item
     Card(
         modifier = Modifier
             .fillMaxWidth()
     ){
+        // row containing the todo item content
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -36,7 +39,11 @@ fun TodoCard(
             verticalAlignment = Alignment.CenterVertically
         ){
             IconButton(onClick = { onDone() }) {
-                Icon(imageVector = Icons.Rounded.CheckCircle, contentDescription = null)
+                Icon(
+                    imageVector = Icons.Rounded.CheckCircle,
+                    tint = Color(204, 150, 227, 255),
+                    contentDescription = null
+                )
             }
             Text(
                 text = todo.task,
@@ -49,6 +56,7 @@ fun TodoCard(
             if (todo.isStar){
                 Icon(
                     imageVector = Icons.Rounded.Star,
+                    tint = Color(204, 150, 227, 255),
                     contentDescription = null,
                     modifier = Modifier
                         .weight(1f)
@@ -59,7 +67,10 @@ fun TodoCard(
                 modifier = Modifier
                     .weight(1f)
             ){
-                Icon(imageVector = Icons.Rounded.Edit, contentDescription = null)
+                Icon(
+                    imageVector = Icons.Rounded.Edit,
+                    tint = Color(204, 150, 227, 255),
+                    contentDescription = null)
 
             }
         }

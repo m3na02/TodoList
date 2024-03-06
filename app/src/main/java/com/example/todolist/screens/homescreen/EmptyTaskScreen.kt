@@ -22,7 +22,7 @@ fun EmptyTaskScreen(paddingValues: PaddingValues){
         contentAlignment = Alignment.Center
     ){
         Text(
-            text = "No Tasks Yet!!",
+            text = "No Tasks Added Yet",
             fontFamily = FontFamily.Monospace,
             fontWeight = FontWeight.SemiBold,
             fontSize = 28.sp

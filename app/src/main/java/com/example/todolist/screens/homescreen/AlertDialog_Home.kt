@@ -40,6 +40,10 @@ import com.example.todolist.domain.model.Todo
 import com.example.todolist.taskTextStyle
 import com.example.todolist.viewmodel.TodoViewModel
 import kotlinx.coroutines.job
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CheckboxDefaults
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.ui.graphics.Color
 
 @Composable
 fun AlertDialog_Home(
@@ -47,14 +51,19 @@ fun AlertDialog_Home(
     onClose:() -> Unit,
     TodoViewModel: TodoViewModel
 ){
+
+    // mutable state for the text input and star check box
     var text by remember { mutableStateOf("") }
     var isStar by remember { mutableStateOf(false) }
 
+    // Create a Todo object from the current text and star state
     val todo = Todo(0, text, isStar)
 
+    // request focus for the text
     val focusRequester = FocusRequester()
     val context = LocalContext.current
 
+    // displaying the alertdialog only if the opendialog is true
     if (openDialog){
         AlertDialog(
             title = {
@@ -77,6 +86,7 @@ fun AlertDialog_Home(
                     modifier = Modifier
                         .fillMaxWidth()
                 ){
+                    // textfield where user enter the task
                     TextField(
                         value = text,
                         onValueChange = {text = it},
@@ -89,6 +99,9 @@ fun AlertDialog_Home(
                         shape = RectangleShape,
                         modifier = Modifier
                             .focusRequester(focusRequester),
+                        colors = TextFieldDefaults.colors(
+                            focusedIndicatorColor =  Color(204, 150, 227, 255),
+                        ),
                         keyboardOptions = KeyboardOptions(
                             capitalization = KeyboardCapitalization.Sentences,
                             imeAction = ImeAction.Done
@@ -96,6 +109,7 @@ fun AlertDialog_Home(
                         keyboardActions = KeyboardActions(
                             onDone = {
                                 if (text.isNotBlank()) {
+                                    // inserting the todo when done button is clicked
                                     TodoViewModel.insertTodo(todo = todo)
                                     text = ""
                                     isStar = false
@@ -103,6 +117,7 @@ fun AlertDialog_Home(
                                 } else {
                                     ToastMessage(
                                         context,
+                                        // show a toast if the task is empty
                                         "Empty Task!!"
                                     )
                                 }
@@ -130,7 +145,11 @@ fun AlertDialog_Home(
                         Spacer(modifier = Modifier.size(8.dp))
                         Checkbox(
                             checked = isStar,
-                            onCheckedChange = {isStar = it})
+                            onCheckedChange = {isStar = it},
+                            colors = CheckboxDefaults.colors(
+                                checkedColor =  Color(204, 150, 227, 255),
+                            ),
+                            )
                     }
                 }
             },
@@ -152,7 +171,11 @@ fun AlertDialog_Home(
                             "Empty Task!!"
                         )
                     }
-                }) {
+                },
+                colors = ButtonDefaults.buttonColors(
+                    containerColor =  Color(204, 150, 227, 255)
+                )
+                ) {
                     Text(text = "Save")
                 }
             },
@@ -161,8 +184,10 @@ fun AlertDialog_Home(
                     onClose()
                     text = ""
                     isStar = false
-                }) {
+                },
+                ) {
                     Text(text = "Close")
+
                 }
             })
         }
