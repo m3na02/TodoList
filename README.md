@@ -15,6 +15,6 @@ This is where user can add their task with the click on the add button on the bo
 This is where user can add their task and star which one is important when saving the task
 
 ## Update Screen
-This is w![update](https://github.com/m3na02/TodoList/assets/98476765/ce2ca3ca-850c-4a72-9a66-4583750a01db)
+![update](https://github.com/m3na02/TodoList/assets/98476765/ce2ca3ca-850c-4a72-9a66-4583750a01db)
 
-here user can update their task if they need to change anything
+This is where user can update their task if they need to change anything
